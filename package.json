@@ -1,0 +1,22 @@
+{
+  "name": "personal-website",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Ruben Smidt <ruben@smidt-bremen.de>",
+  "license": "EUPL-1.2",
+  "scripts": {
+    "dev": "tailwindcss -i ./assets/css/tailwind.css -o assets/css/main.css --watch --jit",
+    "build:tailwind": "tailwindcss -i ./assets/css/tailwind.css -o assets/css/main.css --jit"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.2.6",
+    "postcss": "^8.3.5",
+    "postcss-cli": "^8.3.1",
+    "prettier": "^2.3.2",
+    "prettier-plugin-go-template": "^0.0.11"
+  },
+  "dependencies": {
+    "@tailwindcss/typography": "^0.4.1",
+    "tailwindcss": "^2.2.4"
+  }
+}

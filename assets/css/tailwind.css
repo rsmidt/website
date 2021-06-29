@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .text-link {
+        @apply inline-block border-b border-gray-600 border-dotted hover:text-gray-400 hover:border-gray-400;
+    }
+}
