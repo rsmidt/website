@@ -6,7 +6,7 @@
         {{ with $homePage.Resources.GetMatch "myself" }}
           <img
             class="rounded-lg"
-            src="{{ .RelPermalink }}"
+            src="{{ (.Resize "1000x q90").RelPermalink }}"
             alt="{{ .Params.alt }}"
           />
         {{ end }}
