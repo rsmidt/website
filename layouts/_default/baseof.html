@@ -17,6 +17,9 @@
     {{ end }}
 
     {{ $styles := resources.Get "css/main.css" }}
+    {{ if eq (getenv "HUGO_ENV") "production" | or (eq .Site.Params.env "production") }}
+        {{ $styles = $styles | minify | fingerprint "md5" }}
+    {{ end }}
     <link rel="stylesheet" href="{{ $styles.RelPermalink }}">
 
 
