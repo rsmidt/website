@@ -804,3 +804,32 @@ video {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+@layer components {
+  .text-link {
+    display: inline-block;
+  }
+
+  .text-link {
+    border-bottom-width: 1px;
+  }
+
+  .text-link {
+    border-style: dotted;
+  }
+
+  .text-link {
+    --tw-border-opacity: 1;
+    border-color: rgba(75, 85, 99, var(--tw-border-opacity));
+  }
+
+  .text-link:hover {
+    --tw-border-opacity: 1;
+    border-color: rgba(156, 163, 175, var(--tw-border-opacity));
+  }
+
+  .text-link:hover {
+    --tw-text-opacity: 1;
+    color: rgba(156, 163, 175, var(--tw-text-opacity));
+  }
+}
