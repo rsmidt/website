@@ -34,7 +34,7 @@ jobs:
       - name: Install compression helpers
         run: sudo apt-get install zstd gzip brotli fd-find
       - name: Precompress assets
-        run: fd -tfile '.(css|js|svg|html)$' public -X bash -c 'brotli -fk "$@" && zstd -kf "$@" && gzip -kf "$@"' bash {}
+        run: fdfind -tfile '.(css|js|svg|html)$' public -X bash -c 'brotli -fk "$@" && zstd -kf "$@" && gzip -kf "$@"' bash {}
       - uses: actions/upload-artifact@v2
         with:
           name: website
