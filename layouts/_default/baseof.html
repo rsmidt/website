@@ -1,42 +1,75 @@
 <!DOCTYPE html>
-<html class="text-gray-900 antialiased bg-white" lang="{{ $.Site.LanguageCode | default "en" }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>{{ block "title" . }}{{ with .Site.Title }}{{ . }}{{ end }}{{ with .Params.Title }} | {{ . }}{{ end }}{{ end }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html
+  class="text-gray-900 antialiased bg-white"
+  lang="{{ $.Site.LanguageCode | default "en" }}"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+      {{ block "title" . }}
+        {{ with .Site.Title }}{{ . }}{{ end }}{{ with .Params.Title }}
+          |
+          {{ . }}
+        {{ end }}
+      {{ end }}
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
-            name="description"
-            content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}"
-    >
+      name="description"
+      content="{{ with .Description }}
+        {{ . }}
+      {{ else }}
+        {{ if .IsPage }}
+          {{ .Summary }}
+        {{ else }}
+          {{ with .Site.Params.description }}{{ . }}{{ end }}
+        {{ end }}
+      {{ end }}"
+    />
     {{ hugo.Generator }}
     {{ if eq (getenv "HUGO_ENV") "production" | or (eq .Site.Params.env "production") }}
-    <meta name="robots" content="index, follow">
+      <meta name="robots" content="index, follow" />
     {{ else }}
-    <meta name="robots" content="noindex, nofollow">
+      <meta name="robots" content="noindex, nofollow" />
     {{ end }}
 
     {{ $styles := resources.Get "css/main.css" }}
     {{ if eq (getenv "HUGO_ENV") "production" | or (eq .Site.Params.env "production") }}
-        {{ $styles = $styles | minify | fingerprint "md5" }}
+      {{ $styles = $styles | minify | fingerprint "md5" }}
     {{ end }}
-    <link rel="stylesheet" href="{{ $styles.RelPermalink }}">
-
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" />
 
     {{ block "favicon" . }}
-    <!--    TODO: add favicons-->
+      <!--    TODO: add favicons-->
     {{ end }}
 
     {{ with .OutputFormats.Get "RSS" }}
-    <link href="{{ .RelPermalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
-    <link href="{{ .RelPermalink }}" rel="feed" type="application/rss+xml" title="{{ $.Site.Title }}" />
+      <link
+        href="{{ .RelPermalink }}"
+        rel="alternate"
+        type="application/rss+xml"
+        title="{{ $.Site.Title }}"
+      />
+      <link
+        href="{{ .RelPermalink }}"
+        rel="feed"
+        type="application/rss+xml"
+        title="{{ $.Site.Title }}"
+      />
     {{ end }}
 
     {{- template "_internal/opengraph.html" . -}}
     {{- template "_internal/schema.html" . -}}
-</head>
+  </head>
 
-<body>
-{{ block "main" . }}{{ end }}
-</body>
+  <body>
+    {{ block "main" . }}{{ end }}
+    <footer class="py-4 bg-gray-50">
+      <p class="container text-gray-600 text-sm">
+        Icons courtesy of
+        <a class="text-link" href="https://icons8.com/">Icons8</a>
+      </p>
+    </footer>
+  </body>
 </html>

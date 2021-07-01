@@ -3,20 +3,79 @@
 @tailwind utilities;
 
 @layer components {
-    .text-link {
-        @apply inline-block border-b border-gray-600 border-dotted hover:text-gray-400 hover:border-gray-400;
+  .text-link {
+    @apply inline-block border-b border-gray-600 border-dotted hover:text-gray-900 hover:border-gray-900;
+  }
+
+  .project-card {
+    @apply grid rounded-lg border-gray-200 border px-2 py-4 gap-x-4 gap-y-2;
+
+    grid-template:
+      "name name" auto
+      "description description" 1fr
+      "keywords links" auto
+      / minmax(0, 1fr) auto;
+  }
+
+  @media screen and (min-width: 768px) {
+    .project-card {
+      grid-template:
+        "thumbnail name name" auto
+        "thumbnail description description" 1fr
+        "thumbnail keywords links" auto
+        / 200px minmax(0, 1fr) auto;
     }
+  }
+
+  .project-card__thumbnail {
+    @apply hidden max-h-36 object-cover object-center h-full md:block;
+
+    grid-area: thumbnail;
+  }
+
+  .project-card__name {
+    @apply font-bold;
+
+    grid-area: name;
+  }
+
+  .project-card__description {
+    @apply text-gray-600;
+
+    grid-area: description;
+  }
+
+  .project-card__keywords {
+    @apply flex space-x-2;
+
+    grid-area: keywords;
+  }
+
+  .project-card__links {
+    @apply justify-end;
+
+    grid-area: links;
+  }
+
+  .link-pill,
+  .keyword {
+    @apply p-1 rounded-lg text-xs bg-gray-50 text-gray-600 uppercase;
+  }
+
+  .link-pill {
+    @apply normal-case inline-flex items-center hover:text-gray-900 hover:cursor-pointer;
+  }
 }
 
 @layer utilities {
-    @variants responsive {
-      .no-scrollbar::-webkit-scrollbar {
-        display: none;
-      }
-  
-      .no-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
+  @variants responsive {
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
     }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  }
 }
