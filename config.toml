@@ -1,3 +1,11 @@
 baseURL = "https://rsmidt.dev/"
 languageCode = "en"
 title = "Ruben Smidt"
+disableKinds = ["term", "taxonomy"]
+
+[taxonomies]
+    keywords = "keywords"
+
+[markup.goldmark.renderer]
+    unsafe = true
+

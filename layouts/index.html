@@ -32,43 +32,10 @@
         The following is an excerpt of my work, both open and closed source.
       </p>
       <div class="space-y-4 mt-2">
-        <div class="project-card">
-          {{ with $homePage.Resources.GetMatch "website" }}
-            {{ $resized := .Resize "x288 q60" }}
-            <img
-              class="project-card__thumbnail"
-              width="{{ $resized.Width }}"
-              height="{{ $resized.Height }}"
-              src="data:image/jpeg;base64,{{ $resized.Content | base64Encode }}"
-              alt="{{ .Params.alt }}"
-            />
-            <div class="project-card__name">
-              My website (you're currently looking at)
-            </div>
-            <p class="project-card__description">
-              For a long time I was arguing with myself whether I need a
-              traditional WordPress (or any other backend-heavy) stack to serve
-              my website. Of course not. Static site generators like
-              <a class="text-link" href="https://gohugo.io">Hugo</a> and
-              <a class="text-link" href="https://gatsbyjs.com">Gatsby</a> are
-              perfectly capable of delivering an often far superior user
-              experience.
-            </p>
-            <div class="project-card__keywords">
-              <span class="keyword">Go</span>
-              <span class="keyword">Hugo</span>
-              <span class="keyword">TailwindCss</span>
-            </div>
-            <div class="project-card__links">
-              <a href="https://github.com/rsmidt/website" class="link-pill"
-                >GitHub
-                <span class="max-w-[16px] max-h-[16px] ml-1">
-                  {{ partialCached "svg" (dict "name" "external-link" "class" "fill-current max-w-[16px] max-h-[16px]") }}
-                </span>
-              </a>
-            </div>
-          {{ end }}
-        </div>
+        {{ $projects := .Site.GetPage "/projects" }}
+        {{ range $index, $value := $projects.RegularPages }}
+          {{ partial "project-card" . }}
+        {{ end }}
       </div>
     </section>
     <section class="container">
