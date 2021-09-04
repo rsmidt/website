@@ -836,12 +836,20 @@ video {
   height: 3.5rem;
 }
 
+.max-h-\[50px\] {
+  max-height: 50px;
+}
+
 .max-h-\[16px\] {
   max-height: 16px;
 }
 
 .max-w-prose {
   max-width: 65ch;
+}
+
+.max-w-\[50px\] {
+  max-width: 50px;
 }
 
 .max-w-\[16px\] {
@@ -883,6 +891,12 @@ video {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+}
+
+.space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .overflow-auto {

@@ -74,5 +74,33 @@
         </p>
       </div>
     </section>
+    <section class="container">
+      <h2 class="text-2xl font-extrabold">Say hi</h2>
+      <hr class="mt-2" />
+      <div class="max-w-prose mt-6 space-y-2">
+        <p class="text-gray-600">
+          I'm always thrilled to meet new people, talk and discuss cool things
+          or just chat about what's happening in the world.
+        </p>
+        <p class="text-gray-600">
+          The easiest way to contact me is via email. To keep spam low, you have
+          to find out the address by yourself. Hint, it's the same domain as this
+          site. The <a class="text-link" href="https://en.wikipedia.org/wiki/Email_address#Local-part">local-part</a>
+          (everything before @) is arbitrary (I have an catch-all) or just use <i>ruben</i>.
+        </p>
+        <p class="text-gray-600">Here are some other ways to contact me (in no preferred order):</p>
+        <div class="flex space-x-2">
+          <a href="https://www.linkedin.com/in/ruben-smidt-111002187/">
+            {{ partial "svg" (dict "name" "icons8-linkedin" "class" "fill-current max-w-[50px] max-h-[50px]") }}
+          </a>
+          <a href="https://github.com/rsmidt">
+            {{ partial "svg" (dict "name" "icons8-github" "class" "fill-current max-w-[50px] max-h-[50px]") }}
+          </a>
+          <a href="https://www.xing.com/profile/Ruben_Smidt/cv">
+            {{ partial "svg" (dict "name" "icons8-xing" "class" "fill-current max-w-[50px] max-h-[50px]") }}
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
 {{ end }}
