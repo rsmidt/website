@@ -16,4 +16,4 @@ my website. Of course not. Static site generators like
 <a class="text-link" href="https://gohugo.io">Hugo</a> and
 <a class="text-link" href="https://gatsbyjs.com">Gatsby</a> are
 perfectly capable of delivering an often far superior user
-experience.
+experience. GitHub Actions allow me to keep the live site in sync with every push.
