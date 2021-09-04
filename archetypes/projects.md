@@ -1,7 +1,8 @@
 +++
-title =  "{{ replace .Name "-" " " | title }}"
+title = "{{ replace .Name "-" " " | title }}"
 keywords = []
 repoUrl = ""
+liveLink = ""
 
 [[resources]]
     name = "thumbnail"

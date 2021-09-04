@@ -21,11 +21,21 @@
     {{ end }}
   </div>
   <div class="project-card__links">
-    <a href="{{ .Params.RepoUrl | safeURL }}" class="link-pill"
-      >GitHub
+    {{ if .Params.RepoUrl }}
+      <a href="{{ .Params.RepoUrl | safeURL }}" class="link-pill">
+        GitHub
+        <span class="max-w-[16px] max-h-[16px] ml-1">
+          {{ partialCached "svg" (dict "name" "external-link" "class" "fill-current max-w-[16px] max-h-[16px]") }}
+        </span>
+      </a>
+    {{ end }}
+    {{ if .Params.LiveLink }}
+    <a href="{{ .Params.LiveLink | safeURL }}" class="link-pill">
+      Live
       <span class="max-w-[16px] max-h-[16px] ml-1">
-        {{ partialCached "svg" (dict "name" "external-link" "class" "fill-current max-w-[16px] max-h-[16px]") }}
-      </span>
+          {{ partialCached "svg" (dict "name" "external-link" "class" "fill-current max-w-[16px] max-h-[16px]") }}
+        </span>
     </a>
+    {{ end }}
   </div>
 </div>
