@@ -1,6 +1,6 @@
 +++
-[cascade._build]
-    render = false
+[cascade.build]
+    render = "never"
     list = "local"
     publishResources = false
 +++

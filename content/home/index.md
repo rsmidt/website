@@ -1,9 +1,9 @@
 +++
 title = "Ruben Smidt"
 
-[_build]
-    list = false
-    render = false
+[build]
+    list = "never"
+    render = "never"
 
 [[resources]]
     name = "myself"
