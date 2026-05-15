@@ -2,53 +2,48 @@ name: CD
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
-    env:
-      HUGO_ENV: production
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
         with:
-          hugo-version: '0.83.1'
-      - uses: actions/setup-node@v2
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
         with:
-          node-version: '14'
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v2
-        id: yarn-cache
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=sha,prefix=sha-
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - run: yarn install
-      - run: yarn build:tailwind
-      - run: hugo --minify
-      - name: Install compression helpers
-        run: sudo apt-get install zstd gzip brotli fd-find
-      - name: Precompress assets
-        run: fdfind -tfile '.(css|js|svg|html)$' public -X bash -c 'brotli -fk "$@" && zstd -kf "$@" && gzip -kf "$@"' bash {}
-      - uses: actions/upload-artifact@v2
-        with:
-          name: website
-          path: public
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - uses: actions/download-artifact@v2
-      - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2.3.0
-        with:
-          key: ${{ secrets.SSH_KEY }}
-          known_hosts: "unnecessary"
-      - name: Adding Known Hosts
-        run: echo "known_hosts=$(ssh-keyscan -H ${{ secrets.SSH_HOST }})" >> ~/.ssh/known_hosts
-      - run: rsync -avzz ./website/ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/var/www/rsmidt
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

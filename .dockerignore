@@ -1,0 +1,12 @@
+.git
+.github
+.idea
+.vscode
+public
+node_modules
+resources
+.hugo_build.lock
+.DS_Store
+**/.DS_Store
+LICENSE
+README.md
