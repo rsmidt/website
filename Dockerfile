@@ -29,8 +29,8 @@ RUN hugo --minify \
  && find public -type f \( -name '*.css' -o -name '*.js' -o -name '*.svg' -o -name '*.html' -o -name '*.xml' \) \
     -exec gzip -kf {} +
 
-# 3. Serve via nginx
-FROM nginx:1.27-alpine
+# 3. Serve via nginx (unprivileged, runs as uid 101, listens on 8080)
+FROM nginxinc/nginx-unprivileged:1.27-alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=hugo /src/public /usr/share/nginx/html
-EXPOSE 80
+EXPOSE 8080
